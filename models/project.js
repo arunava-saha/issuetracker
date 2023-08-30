@@ -13,7 +13,7 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Issue: [
+    Issues: [
         { ref: 'Issue', type: mongoose.Schema.ObjectId }
     ]
 }, { timestamps: true })
