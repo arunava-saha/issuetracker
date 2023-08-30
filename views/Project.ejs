@@ -1,0 +1,13 @@
+<div class="w-50 border border-secondary border-1 p-3 m-auto">
+    <h3 class="display-5 p-3 mb-2 bg-secondary text-white">
+        Project : <%= project.Name %>
+    </h3>
+    <h5 class="display-6 p-3 mb-2 bg-info text-dark">
+        Description : <%= project.Description %>
+    </h5>
+    <h3 class="display-6 p-3 mb-2 bg-light text-dark">
+        Author : <%= project.Author %>
+    </h3>
+</div>
+
+<%- include('./parts/_issues') %>

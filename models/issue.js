@@ -11,6 +11,7 @@ const issueSchema = new mongoose.Schema({
     },
     Labels: [{
         type: String,
+        trim: true,
         required: true
     }],
     Author: {

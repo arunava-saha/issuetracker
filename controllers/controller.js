@@ -43,8 +43,8 @@ const createProject = async (req, res) => {
 // @method get
 const project = async (req, res) => {
     try {
-        let projects = await Project.findById(req.params.id).populate({ path: 'Issues' });
-
+        let project = await Project.findById(req.params.id).populate({ path: 'Issues' });
+        // console.log(projects.Issues.length);
         if (project) {
             return res.render('Project', {
                 Title: 'Issue Tracker',
@@ -53,6 +53,7 @@ const project = async (req, res) => {
                 Contributer: 'Arunava Saha'
             })
         }
+
         return res.redirect('back');
     } catch (error) {
         console.log(error);
@@ -69,25 +70,26 @@ const createIssue = async (req, res) => {
     try {
         let project = await Project.findById(req.params.id);
         if (project) {
+            console.log(req.body);
             let issue = await Issue.create({
                 Title: req.body.title,
                 Description: req.body.desc,
                 Labels: req.body.labels,
                 Author: req.body.author
             });
-            project.issues.push(issue);
+            project.Issues.push(issue);
 
-            if (!(typeof req.body.labels === 'String')) {
-                for (let l of lreq.body.labels) {
+            if (!(typeof req.body.labels === 'string')) {
+                for (let l of req.body.labels) {
                     let isP = project.Labels.find((e) => e == l);
                     if (!isP) {
-                        project.labels.push(l);
+                        project.Labels.push(l);
                     }
                 }
             } else {
                 let isP = project.Labels.find((o) => o == req.body.labels);
                 if (!isP) {
-                    project.labels.push(req.body.labels);
+                    project.Labels.push(req.body.labels);
                 }
             }
             await project.save();
